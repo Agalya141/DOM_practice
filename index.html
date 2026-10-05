@@ -3,28 +3,31 @@
 
 <head>
     <title>DOM Practice</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>DOM Practice</h1>
     <p>Youtube Subscribe Button</p>
-    <button class="js-subscribe-button" onclick="
+    <button class="js-subscribe-button subscribe-button" onclick="
     subscribe()
         ">Subscribe</button>
         <h2>Amazon Shipping calculator</h2>
         <p>Orders under $40 = =$10 shipping.</p>
         <p>Orders over $40 = Free shipping</p>
-        <input type="text" class="js-cost-input" placeholder="Cost of order" onkeydown=" handleCostKeyDown(event)">
-        <button onclick="calculateTotal()">Calculate</button>
+        <input type="text" class="js-cost-input cost-input" placeholder="Cost of order" onkeydown=" handleCostKeyDown(event)">
+        <button class="calculate-btn" onclick="calculateTotal()">Calculate</button>
         <p class="js-total-cost"></p>
     <script>
         function subscribe() {
             const buttonElement = document.querySelector('.js-subscribe-button');
             if (buttonElement.innerHTML === 'Subscribe') {
                 buttonElement.innerHTML = 'Subscribed';
+                buttonElement.classList.add('is-subscribed')
             }
             else {
                 buttonElement.innerHTML = 'Subscribe';
+                buttonElement.classList.remove('is-subscribed')
             }
         }
         

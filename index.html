@@ -12,17 +12,18 @@
     <button class="js-subscribe-button subscribe-button" onclick="
     subscribe()
         ">Subscribe</button>
-        <h2>Amazon Shipping calculator</h2>
-        <p>Orders under $40 = =$10 shipping.</p>
-        <p>Orders over $40 = Free shipping</p>
-        <input type="text" class="js-cost-input cost-input" placeholder="Cost of order" onkeydown=" handleCostKeyDown(event)">
-        <button class="calculate-btn" onclick="calculateTotal()">Calculate</button>
-        <p class="js-total-cost"></p>
+    <h2>Amazon Shipping calculator</h2>
+    <p>Orders under $40 = =$10 shipping.</p>
+    <p>Orders over $40 = Free shipping</p>
+    <input type="text" class="js-cost-input cost-input" placeholder="Cost of order"
+        onkeydown=" handleCostKeyDown(event)">
+    <button class="calculate-btn" onclick="calculateTotal()">Calculate</button>
+    <p class="js-total-cost"></p>
 
-        <p>Todo List</p>
-        <input class="js-name-input" placeholder="todo name">
-        <button onclick="addTodo()">Add</button>
-        <p class="result"></p>
+    <p>Todo List</p>
+    <input class="js-name-input" placeholder="todo name">
+    <button onclick="addTodo()">Add</button>
+    <div class="result"></div>
 
     <script>
 
@@ -39,44 +40,51 @@
                 buttonElement.classList.remove('is-subscribed')
             }
         }
-        
+
         /* Amazon Shipping Calculator */
 
-        function calculateTotal(){
-          const inputElement = document.querySelector('.js-cost-input');
-          let cost = Number(inputElement.value);
-          if(cost < 40){
-            cost += 10
-            console.log(cost)
-          }
-          document.querySelector('.js-total-cost').innerHTML = `$${cost}`
+        function calculateTotal() {
+            const inputElement = document.querySelector('.js-cost-input');
+            const result = document.querySelector('.result').innerHTML
+            let cost = Number(inputElement.value);
+            if (cost < 40) {
+                cost += 10
+                console.log(cost)
+            }
+            document.querySelector('.js-total-cost').innerHTML = `$${cost}`
         }
 
-        function handleCostKeyDown(event){
-          if(event.key === 'Enter'){
-            calculateTotal();
-        }
+        function handleCostKeyDown(event) {
+            if (event.key === 'Enter') {
+                calculateTotal();
+            }
         }
 
         /* Todo list */
 
         const todolist = [];
+        function renderTodoList() {
+            let todolistHTML = '';
 
-        function addTodo(){
-           const inputElement =  document.querySelector('.js-name-input') ;
-           let result = document.querySelector('result')
-           const name = inputElement.value ;
-
-           todolist.push(name);
-           console.log(todolist)
-
-           inputElement.value = '';
-           todolistHTML = []
-           for(let i = 0 ; i < todolist.length;i++){
-            todolistHTML += `<div>${todolist[i]}</div>`
-           }
+            for (let i = 0; i < todolist.length; i++) {
+                const todo = todolist[i];
+                const html = `<p>${todo}</p>`;
+                todolistHTML = html
+            }
+            document.querySelector('result').innerHTML = todolistHTML
         }
-      
+        function addTodo() {
+            const inputElement = document.querySelector('.js-name-input');
+            const name = inputElement.value;
+
+            todolist.push(name);
+            console.log(todolist)
+
+            inputElement.value = '';
+
+            renderTodoList()
+        }
+
 
     </script>
 </body>

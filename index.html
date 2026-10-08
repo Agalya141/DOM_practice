@@ -21,7 +21,7 @@
     <p class="js-total-cost"></p>
 
     <p>Todo List</p>
-    <input class="js-name-input" placeholder="todo name">
+    <input class="js-name-input" placeholder="todo name" onkeydown="handleTodoKeyDown(event)">
     <button onclick="addTodo()">Add</button>
     <div class="result"></div>
 
@@ -62,29 +62,30 @@
 
         /* Todo list */
 
-        const todolist = [];
         function renderTodoList() {
-            let todolistHTML = '';
-
+            let todoListHTML = ''
             for (let i = 0; i < todolist.length; i++) {
                 const todo = todolist[i];
                 const html = `<p>${todo}</p>`;
-                todolistHTML = html
+                todoListHTML += html;
+                document.querySelector('.result').innerHTML = todoListHTML;
             }
-            document.querySelector('result').innerHTML = todolistHTML
         }
+        const todolist = [];
+
         function addTodo() {
             const inputElement = document.querySelector('.js-name-input');
-            const name = inputElement.value;
-
-            todolist.push(name);
-            console.log(todolist)
-
+            const value = inputElement.value;
+            todolist.push(value);
             inputElement.value = '';
-
             renderTodoList()
         }
 
+        function handleTodoKeyDown(event){
+            if(event.key === 'Enter'){
+                addTodo();
+            }
+        }
 
     </script>
 </body>
